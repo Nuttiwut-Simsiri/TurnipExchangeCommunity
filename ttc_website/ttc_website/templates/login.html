@@ -1,0 +1,44 @@
+{% extends 'base.html'%}
+
+{% block content %}
+{% load static %}
+<style>
+.bgimg {
+  background-image: url("{% static 'img/login_bg.jpg' %}");
+  min-height: 100%;
+  background-position: center;
+  background-size: cover;
+}
+.nes-container{
+  width: 45%;
+  left: 25%;
+  top: 50px;
+  position: relative;
+}
+</style>
+<div class="bgimg">
+  <div id="login" class="nes-container with-title">
+    <h3 class="title"> <i class="nes-icon is-small heart"></i> Welcome back, <i class="nes-icon is-small heart"></i></h3>
+    <form method="post" action='/ttc/webboard/login'>
+      <div class="nes-field">
+        <label>Username</label>
+        <input type="text" id="username" class="nes-input" required>
+      </div>
+      <div class="nes-field">
+        <label>Password</label>
+        <input type="password" id="password" class="nes-input" required>
+      </div>
+      <div>&nbsp</div>
+      <button class="nes-btn is-success" type="submit">Login</button>
+      <a class="nes-btn is-error" href="/ttc/webboard/welcome">Cancel</a>
+      <div>&nbsp</div>
+      <div class="nes-field">
+        <a id="sign-in-gg" class="nes-btn" style="width:65%; left:15%;"> <i class="nes-icon google is-small"></i> Sign in with Google  </a>
+        <div>&nbsp</div>
+        <a id="sign-in-fb" class="nes-btn" style="width:65%;left:15%;"> <i class="nes-icon facebook is-small"></i> Sign in with Facebook</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

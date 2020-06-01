@@ -1,0 +1,38 @@
+{% extends 'base.html'%}
+
+{% block content %}
+{% load static %}
+<style>
+.bgimg {
+  background-image: url("{% static 'img/index_bg.jpg' %}");
+  min-height: 100%;
+  background-position: center;
+  background-size: cover;
+}
+.nav-brand {
+  position: absolute;
+  right: 0px;
+  padding: 10px 10px 15px 15px;
+}
+
+.nes-container{
+  top: 100px;
+  left: 100px;
+  width: 55%;
+  position: absolute;
+}
+
+</style>
+<div class="bgimg">
+  <div class="nav-brand">
+    <a class="nes-btn is-primary" href="/ttc/webboard/login">Log in </a>
+    <a class="nes-btn is-success" href="/ttc/webboard/sign-up">Sign up</a>
+  </div>
+  <div id="greeting" class="nes-container with-title">
+    <h3 class="title">Message<i class="nes-icon is-small heart"></i><i class="nes-icon is-small heart"></i><i class="nes-icon is-small heart"></i></h3>
+    <h2> Welcome! Turnip Trader Community </h2>
+    <p> The animal crossing community who love trading.</p>
+  </div>
+</div>
+
+{% endblock %}
