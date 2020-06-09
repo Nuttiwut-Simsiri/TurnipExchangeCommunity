@@ -33,6 +33,16 @@
     <h2> Welcome! Turnip Trader Community </h2>
     <p> The animal crossing community who love trading.</p>
   </div>
+
+  {% if messages %}
+  <div class="nes-balloon from-left">
+    <ul class="nes-list is-disc">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
 </div>
 
 {% endblock %}

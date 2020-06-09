@@ -1,0 +1,111 @@
+{% extends 'base.html'%}
+
+{% block content %}
+{% load static %}
+<style>
+.bgimg {
+  background-image: url("{% static 'img/blog_bg.jpg' %}");
+  position: fixed; 
+  top: -50%; 
+  left: -50%; 
+  width: 200%; 
+  height: 200%;
+}
+.nav-brand {
+  position: absolute;
+  right: 0px;
+  padding: 10px 10px 15px 15px;
+}
+
+.nes-container{
+  top: 100px;
+  left: 100px;
+  width: 55%;
+  position: absolute;
+}
+
+</style>
+<div class="bgimg">
+  {% if messages %}
+  <div class="nes-balloon from-left">
+    <ul class="nes-list is-disc">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  <div class="nav-brand">
+    <a class="nes-btn is-primary" href="/ttc/webboard/login">Log in </a>
+    <a class="nes-btn is-success" href="/ttc/webboard/sign-up">Sign up</a>
+  </div>
+
+  <section class="nes-container">
+    <section class="message-list">
+      <section class="message -left">
+        <i class="nes-bcrikko"></i>
+        <!-- Balloon -->
+        <div class="nes-balloon from-left">
+          <p>Hello NES.css</p>
+        </div>
+      </section>
+  
+      <section class="message -right">
+        <!-- Balloon -->
+        <div class="nes-balloon from-right">
+          <p>Good morning. Thou hast had a good night's sleep, I hope.</p>
+        </div>
+        <i class="nes-bcrikko"></i>
+      </section>
+      <section class="message -left">
+        <i class="nes-bcrikko"></i>
+        <!-- Balloon -->
+        <div class="nes-balloon from-left">
+          <p>Hello NES.css</p>
+        </div>
+      </section>
+  
+      <section class="message -right">
+        <!-- Balloon -->
+        <div class="nes-balloon from-right">
+          <p>Good morning. Thou hast had a good night's sleep, I hope.</p>
+        </div>
+        <i class="nes-bcrikko"></i>
+      </section>
+      <section class="message -left">
+        <i class="nes-bcrikko"></i>
+        <!-- Balloon -->
+        <div class="nes-balloon from-left">
+          <p>Hello NES.css</p>
+        </div>
+      </section>
+  
+      <section class="message -right">
+        <!-- Balloon -->
+        <div class="nes-balloon from-right">
+          <p>Good morning. Thou hast had a good night's sleep, I hope.</p>
+        </div>
+        <i class="nes-bcrikko"></i>
+      </section>
+
+      <section class="message -left">
+        <i class="nes-bcrikko"></i>
+        <!-- Balloon -->
+        <div class="nes-balloon from-left">
+          <p>Hello NES.css</p>
+        </div>
+      </section>
+  
+      <section class="message -right">
+        <!-- Balloon -->
+        <div class="nes-balloon from-right">
+          <p>Good morning. Thou hast had a good night's sleep, I hope.</p>
+        </div>
+        <i class="nes-bcrikko"></i>
+      </section>
+    </section>
+  </section>
+</div>
+
+{% endblock %}

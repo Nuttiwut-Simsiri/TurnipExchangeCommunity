@@ -19,14 +19,14 @@
 <div class="bgimg">
   <div id="login" class="nes-container with-title">
     <h3 class="title"> <i class="nes-icon is-small heart"></i> Welcome back, <i class="nes-icon is-small heart"></i></h3>
-    <form method="post" action='/ttc/webboard/login'>
+    <form method="post" action='/ttc/webboard/login'> {% csrf_token %}
       <div class="nes-field">
-        <label>Username</label>
-        <input type="text" id="username" class="nes-input" required>
+        <label for="id_username">Username</label>
+        <input type="text" id="username" name="username" class="nes-input" required>
       </div>
       <div class="nes-field">
-        <label>Password</label>
-        <input type="password" id="password" class="nes-input" required>
+        <label for="id_password">Password</label>
+        <input type="password" id="password" name="password" class="nes-input" required>
       </div>
       <div>&nbsp</div>
       <button class="nes-btn is-success" type="submit">Login</button>
