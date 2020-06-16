@@ -20,6 +20,7 @@ class Migration(migrations.Migration):
                 ('postDate', models.DateField()),
                 ('modifiedDate', models.DateField()),
                 ('postBy', models.CharField(max_length=255)),
+                ('uuidPost', models.CharField(max_length=36)),
             ],
         ),
     ]

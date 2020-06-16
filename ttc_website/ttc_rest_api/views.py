@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http.response import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
@@ -7,11 +7,13 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from django.core.exceptions import ObjectDoesNotExist
 
-from ttc_rest_api.models import TTC_POST_TB
-from ttc_rest_api.serializers import PostSerializer
+from ttc_rest_api.models import TTC_POST_TB, TTC_COMMENT_TB
+from ttc_rest_api.serializers import PostSerializer, CommentSerializer
 
 from django.contrib.auth.models import User
 from ttc_rest_api.serializers import UserSerializer
+
+from uuid import uuid1
 
 
 def form_parser(form_post):
@@ -33,16 +35,19 @@ def post_all(request):
         return JsonResponse(post_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET','PUT','DELETE'])
-def post_info(request, post_id):
+def post_info(request, uuid):
     try:
-        post_detail = TTC_POST_TB.objects.get(id=post_id)
+        post_detail = TTC_POST_TB.objects.get(uuidPost=uuid)
     except ObjectDoesNotExist as e:
-        return JsonResponse({'error': f"This post id({post_id}) does not exist."}, safe=False, status=status.HTTP_404_NOT_FOUND)
+        return JsonResponse({'error': f"This post id({uuid}) does not exist."}, safe=False, status=status.HTTP_404_NOT_FOUND)
 
     if request.method == "GET":
         try:
+            post = get_object_or_404(TTC_POST_TB, uuidPost=uuid)
+            comments = post.comments.all()
             post_serializer = PostSerializer(post_detail)
-            return JsonResponse(post_serializer.data, safe=False ,status=status.HTTP_200_OK)
+            comment_serializer = CommentSerializer(comments , many=True)
+            return JsonResponse({'Posts': post_serializer.data, 'Comments': comment_serializer.data}, safe=False ,status=status.HTTP_200_OK)
         except Exception as e:
             return JsonResponse({'error': e}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
@@ -60,7 +65,6 @@ def post_info(request, post_id):
     elif request.method == "DELETE":
         post_detail.delete()
         return JsonResponse({'message': f'This post id({post_id}) was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
-
 
 @api_view(['GET','POST'])
 def user_all(request):

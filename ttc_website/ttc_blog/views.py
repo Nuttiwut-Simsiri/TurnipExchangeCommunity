@@ -20,7 +20,7 @@ def render_login(request):
             user = authenticate(username=username, password=password)
             login(request, user)
             messages.success(request, 'Welcome new member to our community')
-            return redirect('/ttc/webboard')
+            return redirect('/ttc/webboard/home')
         
         messages.success(request, "We not found your acccount in our community.")
         return render(request, 'login.html', {"page_title": "==== Login ===="})
@@ -55,7 +55,18 @@ def render_sign_up(request):
 
 def render_webboard(request):
     if request.method == "GET":
-        return render(request, 'webboard.html', {"page_title": "==== Sign up to our community ===="})
+        response = requests.get('http://127.0.0.1:8000/ttc-api/posts')
+        print(response.json())
+        return render(request, 'webboard.html', {"page_title": "==== Sign up to our community ====", "posts": response.json()})
+
+    elif requests.mothod == "POST":
+        pass 
+
+def render_post(request, uuid):
+    if request.method == "GET":
+        response = requests.get(f'http://127.0.0.1:8000/ttc-api/posts/{uuid}').json()
+        return render(request, 'post.html', {"page_title": "==== Sign up to our community ====", 
+            "posts":response['Posts'], "comments":response["Comments"] })
 
     elif requests.mothod == "POST":
         pass 
